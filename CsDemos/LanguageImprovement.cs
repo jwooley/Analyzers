@@ -9,7 +9,7 @@ namespace TestProject
             int x;
             if (int.TryParse("123", out x))
                 DoSomething();
-            DoSomethingElse();
+                DoSomethingElse();
 
         }
 
@@ -20,11 +20,11 @@ namespace TestProject
 
     public class Person
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
         public string FullName()
         {
-            return $"{FirstName} {LastName}";
+            return String.Format("{0} {1}", lastName, firstName);
         }
         public int Age { get; set; }
         public bool IsOld()
@@ -32,11 +32,17 @@ namespace TestProject
             var result = false;
             if (Age == 0)
             {
-                throw new ArgumentNullException(nameof(Age));
+                throw new ArgumentNullException("Age");
             }
-            result = Age > 70;
+            if (Age > 70)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
             return result;
         }
-
     }
 }
