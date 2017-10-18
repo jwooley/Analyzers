@@ -21,7 +21,7 @@ namespace CodeCrackerSamples
 
                 var person = GetJim();
                 Console.Write($"{person.Name} is {person.Age} years old");
-                Console.WriteLine(String.Format("His parent is [0]", person.Parent.Name));
+                Console.WriteLine(String.Format("His parent is {1}", person.Parent.Name));
             }
             catch (Exception ex)
             {

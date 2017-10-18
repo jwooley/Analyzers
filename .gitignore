@@ -250,3 +250,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+*.lastcodeanalysissucceeded
+/JsDemos/{0046D22C-293F-412C-9AE7-E59C34033AEA}/CodeAnalysisLog.xml

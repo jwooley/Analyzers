@@ -7,10 +7,15 @@ namespace TestProject
         public static void LanguageImprovementTests()
         {
             int x;
+
             if (int.TryParse("123", out x))
                 DoSomething();
                 DoSomethingElse();
 
+            var p = new Person();
+            p.firstName = "VS";
+            p.lastName = "Live";
+            Console.WriteLine(p.FullName());
         }
 
 
@@ -47,7 +52,13 @@ namespace TestProject
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool v)
+        {
+            // nothing to see here
         }
     }
 }
