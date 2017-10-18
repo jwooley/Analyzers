@@ -18,7 +18,7 @@ namespace TestProject
         public static void DoSomethingElse() { }
     }
 
-    public class Person
+    public class Person : IDisposable
     {
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -43,6 +43,11 @@ namespace TestProject
                 result = false;
             }
             return result;
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

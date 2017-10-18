@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace LanguageFeaturesCS
 {
@@ -14,7 +15,7 @@ namespace LanguageFeaturesCS
             set;
         }
 
-        private readonly string aRandomField = "sgiosg";
+        private readonly string aRandomField = "Unknown";
 
         private void AnotherMethod() {
         }
@@ -27,7 +28,7 @@ namespace LanguageFeaturesCS
 
         public string FullName()
         {
-            return $"{FirstName} {LastName}";
+            return $"{FirstName} {LastName ?? aRandomField}";
         }
 
         public event EventHandler PropertyChanged;
@@ -36,6 +37,8 @@ namespace LanguageFeaturesCS
         {
             FirstName = first;
             LastName = last;
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullName)));
         }
     }
 }

@@ -9,13 +9,15 @@ namespace CodeCrackerSamples
     public class Class1
     {
 
+        const int theAnswer = 42;
+
         public void ShouldUseVar(string input)
-		{
+        {
             try
-			{
+            {
                 if (string.IsNullOrEmpty(input))
-					DoSomethingInteresting();
-					throw new ArgumentException("input");
+                    DoSomethingInteresting();
+                    throw new ArgumentException("input");
 
                 var person = GetJim();
                 Console.Write($"{person.Name} is {person.Age} years old");
@@ -34,10 +36,10 @@ namespace CodeCrackerSamples
             return person;
         }
         public void DoSomethingInteresting()
-        { }
+        { Console.WriteLine(theAnswer); }
 
     }
-    public class Person 
+    public class Person
     {
         private string _name;
         public string Name
@@ -70,7 +72,7 @@ namespace CodeCrackerSamples
         public bool IsPrime()
         {
             int[] primes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
-            return primes.Where(p => p == Age).Any(); 
+            return primes.Where(p => p == Age).Any();
         }
         public bool IsFibber()
         {
@@ -97,7 +99,7 @@ namespace CodeCrackerSamples
             }
         }
 
-		public string SayHello()
+        public string SayHello()
         {
             var hello = "Hello";
             for (int i = 0; i < 20; i++)

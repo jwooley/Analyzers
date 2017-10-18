@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "CsDemos\TestProject.csproj", "{370DEF7A-9954-4E93-8188-AF90E9237ED2}"
 EndProject
@@ -25,6 +25,11 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "JsDemos(1)", "JsDemos\", "{
 		VWDPort = "53891"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CFA26D3A-C6C2-4D0D-8550-9B34A68FC85D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +47,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7000BC0F-23E3-4089-B6C6-72ECFD1446AF}
 	EndGlobalSection
 EndGlobal
