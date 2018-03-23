@@ -108,5 +108,13 @@ namespace CodeCrackerSamples
             }
             return hello;
         }
+        public static IEnumerable<Person> People()
+        {
+            return (new List<Person>
+            {
+                new Person(),
+                new Person()
+            }).OrderBy(p => p.Name).OrderBy(p => p.Age);
+        }
     }
 }
