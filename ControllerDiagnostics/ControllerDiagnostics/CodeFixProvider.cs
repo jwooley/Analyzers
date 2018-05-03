@@ -41,7 +41,7 @@ namespace ControllerDiagnostics
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
-                CodeAction.Create("Make uppercase", c => MakeUppercaseAsync(context.Document, declaration, c)),
+                CodeAction.Create("Make uppercase", c => MakeUppercaseAsync(context.Document, declaration, c), ControllerNamingConventionAnalyzer.DiagnosticId),
                 diagnostic);
         }
 
