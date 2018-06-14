@@ -12,18 +12,16 @@ namespace Analyzer4.Test
     public class UnitTest : CodeFixVerifier
     {
 
-        //No diagnostics expected to show up
         [TestMethod]
-        public void TestMethod1()
+        public void EmptyFileShouldNotRaiseDiagnostic()
         {
             var test = @"";
 
             VerifyCSharpDiagnostic(test);
         }
 
-        //Diagnostic and CodeFix both triggered and checked for
         [TestMethod]
-        public void TestMethod2()
+        public void VariableWithOneCharacterShouldRaiseDiagnostic()
         {
             var test = @"
     using System;
@@ -36,23 +34,31 @@ namespace Analyzer4.Test
     namespace ConsoleApplication1
     {
         class TypeName
-        {   
+        {  
+			void foo()
+			{
+				var x = 1;
+			}
         }
     }";
             var expected = new DiagnosticResult
             {
                 Id = "Analyzer4",
-                Message = String.Format("Type name '{0}' contains lowercase letters", "TypeName"),
+                Message = $"Type name 'x' is too short",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[] {
-                            new DiagnosticResultLocation("Test0.cs", 11, 15)
+                            new DiagnosticResultLocation("Test0.cs", 15, 9)
                         }
             };
 
             VerifyCSharpDiagnostic(test, expected);
+        }
 
-            var fixtest = @"
+		[TestMethod]
+		public void VariableWithMoreThanOneCharacterShouldntRaiseDiagnostic()
+		{
+			var test = @"
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -62,19 +68,19 @@ namespace Analyzer4.Test
 
     namespace ConsoleApplication1
     {
-        class TYPENAME
-        {   
+        class TypeName
+        {  
+			void foo()
+			{
+				var x1 = 1;
+			}
         }
     }";
-            VerifyCSharpFix(test, fixtest);
-        }
 
-        //protected override CodeFixProvider GetCSharpCodeFixProvider()
-        //{
-        //    return new Analyzer4CodeFixProvider();
-        //}
+			VerifyCSharpDiagnostic(test);
+		}
 
-        protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
+		protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
             return new Analyzer4Analyzer();
         }

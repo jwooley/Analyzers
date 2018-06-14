@@ -40,25 +40,6 @@ namespace Analyzer4
 
         }
 
-        private static void AnalyzeForeach(SyntaxNodeAnalysisContext context)
-        {
-            foreach (var c in "ite")
-            {
-
-            }
-            ForEachStatementSyntax syntax = (ForEachStatementSyntax)context.Node;
-            var variable = syntax.Identifier;
-            if (variable == null)
-            {
-                return;
-            }
-            if (variable.ValueText.Length == 1)
-            {
-                string name = variable.ValueText;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, variable.GetLocation(), name));
-            }
-        }
-
         private static void AnalyzeLocal(SyntaxNodeAnalysisContext context)
         {
             LocalDeclarationStatementSyntax syntax = (LocalDeclarationStatementSyntax)context.Node;
@@ -87,32 +68,51 @@ namespace Analyzer4
             }
         }
 
-        //private static void AnalyzeField(SyntaxNodeAnalysisContext context)
-        //{
-        //    FieldDeclarationSyntax syntax = (FieldDeclarationSyntax)context.Node;
-        //    var variables = syntax.Declaration?.Variables;
-        //    if (variables == null)
-        //    {
-        //        return;
-        //    }
+		private static void AnalyzeForeach(SyntaxNodeAnalysisContext context)
+		{
+			foreach (var c in "ite")
+			{
 
-        //    foreach (VariableDeclaratorSyntax declarator in variables.Value)
-        //    {
-        //        if (declarator ==  null)
-        //        {
-        //            continue;
-        //        }
-        //        var identifier = declarator.Identifier;
-        //        if (identifier.IsMissing)
-        //        {
-        //            continue;
-        //        }
-        //        if (identifier.ValueText.Length == 1)
-        //        {
-        //            string name = identifier.ValueText;
-        //            context.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), name));
-        //        }
-        //    }
-        //}
-    }
+			}
+			ForEachStatementSyntax syntax = (ForEachStatementSyntax)context.Node;
+			var variable = syntax.Identifier;
+			if (variable == null)
+			{
+				return;
+			}
+			if (variable.ValueText.Length == 1)
+			{
+				string name = variable.ValueText;
+				context.ReportDiagnostic(Diagnostic.Create(Rule, variable.GetLocation(), name));
+			}
+		}
+
+		//private static void AnalyzeField(SyntaxNodeAnalysisContext context)
+		//{
+		//    FieldDeclarationSyntax syntax = (FieldDeclarationSyntax)context.Node;
+		//    var variables = syntax.Declaration?.Variables;
+		//    if (variables == null)
+		//    {
+		//        return;
+		//    }
+
+		//    foreach (VariableDeclaratorSyntax declarator in variables.Value)
+		//    {
+		//        if (declarator ==  null)
+		//        {
+		//            continue;
+		//        }
+		//        var identifier = declarator.Identifier;
+		//        if (identifier.IsMissing)
+		//        {
+		//            continue;
+		//        }
+		//        if (identifier.ValueText.Length == 1)
+		//        {
+		//            string name = identifier.ValueText;
+		//            context.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), name));
+		//        }
+		//    }
+		//}
+	}
 }
