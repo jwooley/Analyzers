@@ -55,6 +55,38 @@ namespace Analyzer4.Test
             VerifyCSharpDiagnostic(test, expected);
         }
 
+
+		[TestMethod]
+		public void ForeachVariableWithOneCharacterShouldRaiseDiagnostic()
+		{
+			var test = @"
+    namespace ConsoleApplication1
+    {
+        class TypeName
+        {  
+			void foo()
+			{
+				foreach(var x in new int[0])
+				{
+					Console.WriteLine(x);
+				}
+			}
+        }
+    }";
+			var expected = new DiagnosticResult
+			{
+				Id = "Analyzer4",
+				Message = $"Type name 'x' is too short",
+				Severity = DiagnosticSeverity.Warning,
+				Locations =
+					new[] {
+							new DiagnosticResultLocation("Test0.cs", 8, 17)
+						}
+			};
+
+			VerifyCSharpDiagnostic(test, expected);
+		}
+
 		[TestMethod]
 		public void VariableWithMoreThanOneCharacterShouldntRaiseDiagnostic()
 		{
