@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TestProject
 {
@@ -20,7 +21,17 @@ namespace TestProject
 
 
         public static void DoSomething() { }
-        public static void DoSomethingElse() { }
+        public static IEnumerable<Person> DoSomethingElse()
+        {
+            var people = new List<Person>();
+            foreach (var person in people)
+            {
+                if (person.Age > 21 && person.Age < 70)
+                {
+                    yield return person;
+                }
+            }
+        }
     }
 
     public class Person : IDisposable
