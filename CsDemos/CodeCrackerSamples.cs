@@ -104,7 +104,7 @@ namespace CodeCrackerSamples
             var hello = "Hello";
             for (int i = 0; i < 20; i++)
             {
-                hello += "Hello";
+                hello += Blog.AbsoluteUri;
             }
             return hello;
         }

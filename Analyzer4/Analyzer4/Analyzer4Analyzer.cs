@@ -22,11 +22,17 @@ namespace Analyzer4
         private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Resources.AnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private const string Category = "Naming";
 
-        private static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: Description);
+        private static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId,
+																			Title,
+																			MessageFormat,
+																			Category,
+																			DiagnosticSeverity.Warning,
+																			isEnabledByDefault: true,
+																			description: Description);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+		public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public override void Initialize(AnalysisContext context)
+		public override void Initialize(AnalysisContext context)
         {
             // TODO: Consider registering other actions that act on syntax instead of or in addition to symbols
             // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Analyzer%20Actions%20Semantics.md for more information
@@ -34,13 +40,21 @@ namespace Analyzer4
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
 
-            //context.RegisterSyntaxNodeAction(AnalyzeField, SyntaxKind.FieldDeclaration);
             context.RegisterSyntaxNodeAction(AnalyzeLocal, SyntaxKind.LocalDeclarationStatement);
             context.RegisterSyntaxNodeAction(AnalyzeForeach, SyntaxKind.ForEachStatement);
+			//context.RegisterSyntaxNodeAction(AnalyzeField, SyntaxKind.FieldDeclaration);
 
-        }
+		}
 
-        private static void AnalyzeLocal(SyntaxNodeAnalysisContext context)
+		/// <summary>
+		/// Finds single character local variable declarations
+		/// </summary>
+		/// <example>
+		/// // Detects x in:
+		/// var x = 1;
+		/// </example>
+		/// <param name="context"></param>
+		private static void AnalyzeLocal(SyntaxNodeAnalysisContext context)
         {
             LocalDeclarationStatementSyntax syntax = (LocalDeclarationStatementSyntax)context.Node;
             var variables = syntax.Declaration?.Variables;
@@ -68,12 +82,16 @@ namespace Analyzer4
             }
         }
 
+		/// <summary>
+		/// Finds single character foreach local variable declarations
+		/// </summary>
+		/// <example>
+		/// // Detects x in:
+		/// foreach (var x in "test")
+		/// </example>
+		/// <param name="context"></param>
 		private static void AnalyzeForeach(SyntaxNodeAnalysisContext context)
 		{
-			foreach (var c in "ite")
-			{
-
-			}
 			ForEachStatementSyntax syntax = (ForEachStatementSyntax)context.Node;
 			var variable = syntax.Identifier;
 			if (variable == null)
