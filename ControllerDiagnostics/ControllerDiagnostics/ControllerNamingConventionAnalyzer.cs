@@ -1,6 +1,8 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Immutable;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Collections.Immutable;
 
 namespace ControllerDiagnostics
 {
@@ -31,12 +33,36 @@ namespace ControllerDiagnostics
 				return;
 			}
 
-			if ((symbol.BaseType.Name == "Controller" || symbol.BaseType.Name == "ApiController") &&
-					  !symbol.Name.EndsWith("Controller"))
+			if ((symbol.InheritsFrom("System.Web.Mvc.Controller") || symbol.InheritsFrom("System.Web.Http.ApiController")) && !symbol.Name.EndsWith("Controller"))
 			{
 				var diagnostic = Diagnostic.Create(Rule, symbol.Locations[0], symbol.Name);
 				context.ReportDiagnostic(diagnostic);
 			}
+		}
+	}
+
+	internal static class INamedTypeSymbolExtensions
+	{
+		public static bool InheritsFrom(this INamedTypeSymbol symbol, string baseTypeFullName)
+		{
+			const int MAX_SEARCH_DEPTH = 1000;
+			var counter = 0;
+
+			while (counter < MAX_SEARCH_DEPTH)
+			{
+				if (symbol.ToString() == baseTypeFullName)
+				{
+					return true;
+				}
+				if (symbol.BaseType != null)
+				{
+					symbol = symbol.BaseType;
+					++counter;
+					continue;
+				}
+				break;
+			}
+			return false;
 		}
 	}
 }
