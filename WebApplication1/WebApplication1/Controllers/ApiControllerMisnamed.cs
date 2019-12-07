@@ -13,5 +13,10 @@ namespace WebApplication1.Controllers
 		{
 
 		}
+		public void DoSomething()
+		{
+			var x = 1;
+			Console.WriteLine(x);
+		}
 	}
 }
