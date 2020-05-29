@@ -14,11 +14,9 @@ namespace ControllerDiagnostics.Test
         public void MvcClassWithoutConstructorFixes()
         {
             var test = @"
-using System.Web.Mvc;
-
 namespace WebApplicationCS.Controllers
 {
-    public class HomeControllerTest : Controller
+    public class HomeControllerTest : System.Web.Mvc.Controller
     {
         public ActionResult Index()
         {
@@ -33,18 +31,16 @@ namespace WebApplicationCS.Controllers
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[] {
-                            new DiagnosticResultLocation("Test0.cs", 6, 18)
+                            new DiagnosticResultLocation("Test0.cs", 4, 18)
                         }
             };
 
             VerifyCSharpDiagnostic(test, expected);
 
             var fixtest = @"
-using System.Web.Mvc;
-
 namespace WebApplicationCS.Controllers
 {
-    public class HomeTestController : Controller
+    public class HomeTestController : System.Web.Mvc.Controller
     {
         public ActionResult Index()
         {
@@ -61,11 +57,9 @@ namespace WebApplicationCS.Controllers
         public void MvcClassNotEndingInControllerCreatesDiagnostics()
         {
             var test = @"
-using System.Web.Mvc;
-
 namespace WebApplicationCS.Controllers
 {
-    public class HomeControllerTest : Controller
+    public class HomeControllerTest : System.Web.Mvc.Controller
     {
 		public HomeControllerTest()
 		{
@@ -84,18 +78,16 @@ namespace WebApplicationCS.Controllers
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[] {
-                            new DiagnosticResultLocation("Test0.cs", 6, 18)
+                            new DiagnosticResultLocation("Test0.cs", 4, 18)
                         }
             };
 
             VerifyCSharpDiagnostic(test, expected);
 
             var fixtest = @"
-using System.Web.Mvc;
-
 namespace WebApplicationCS.Controllers
 {
-    public class HomeTestController : Controller
+    public class HomeTestController : System.Web.Mvc.Controller
     {
 		public HomeTestController()
 		{
@@ -115,11 +107,9 @@ namespace WebApplicationCS.Controllers
         public void MvcClassEndingInControllerDoesNotCreateDiagnostic()
         {
             var test = @"
-using System.Web.Mvc;
-
 namespace WebApplicationCS.Controllers
 {
-    public class HomeTestController : Controller
+    public class HomeTestController : System.Web.Mvc.Controller
     {
 		public HomeConTest()
 		{
@@ -140,11 +130,9 @@ namespace WebApplicationCS.Controllers
         public void WebApiClassNotEndingInControllerCreatesDiagnostics()
         {
             var test = @"
-using System.Web.Http;
-
 namespace WebApplicationCS.Controllers
 {
-    public class HomeConTest : ApiController
+    public class HomeConTest : System.Web.Http.ApiController
     {
 		public HomeConTest()
 		{
@@ -160,7 +148,7 @@ namespace WebApplicationCS.Controllers
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
         new[] {
-                            new DiagnosticResultLocation("Test0.cs", 6, 18)
+                            new DiagnosticResultLocation("Test0.cs", 4, 18)
                         }
             };
 
@@ -168,11 +156,9 @@ namespace WebApplicationCS.Controllers
             VerifyCSharpDiagnostic(test, expected);
 
             var fixtest = @"
-using System.Web.Http;
-
 namespace WebApplicationCS.Controllers
 {
-    public class HomeConTestController : ApiController
+    public class HomeConTestController : System.Web.Http.ApiController
     {
 		public HomeConTestController()
 		{
