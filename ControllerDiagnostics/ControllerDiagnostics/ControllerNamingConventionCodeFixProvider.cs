@@ -14,8 +14,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
+using ControllerAnalyzers;
 
-namespace ControllerDiagnostics
+namespace Controller.CodeFixes
 {
     [ExportCodeFixProvider(nameof(ControllerNamingConventionCodeFixProvider), LanguageNames.CSharp), Shared]
     public class ControllerNamingConventionCodeFixProvider : CodeFixProvider
@@ -24,7 +25,8 @@ namespace ControllerDiagnostics
 
         public sealed override FixAllProvider GetFixAllProvider()
         {
-            return WellKnownFixAllProviders.BatchFixer;
+			// See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
+			return WellKnownFixAllProviders.BatchFixer;
         }
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -34,7 +36,12 @@ namespace ControllerDiagnostics
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().First();
 
-            context.RegisterCodeFix(CodeAction.Create("Ensure type ends in 'Controller'", c => MakeEndInControllerAsync(context.Document, declaration, c), ControllerNamingConventionAnalyzer.DiagnosticId), diagnostic);
+            context.RegisterCodeFix(
+				CodeAction.Create(
+					title: "Ensure type ends in 'Controller'",
+					createChangedSolution: c => MakeEndInControllerAsync(context.Document, declaration, c),
+					ControllerNamingConventionAnalyzer.DiagnosticId), 
+				diagnostic);
         }
 
         private async Task<Solution> MakeEndInControllerAsync(Document document, TypeDeclarationSyntax typeDecl, CancellationToken cancellationToken)
