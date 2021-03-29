@@ -25,11 +25,6 @@ namespace Analyzer4.Test
         {
             var test = @"
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
 
     namespace ConsoleApplication1
     {
@@ -48,7 +43,7 @@ namespace Analyzer4.Test
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[] {
-                            new DiagnosticResultLocation("Test0.cs", 15, 9)
+                            new DiagnosticResultLocation("Test0.cs", 10, 9)
                         }
             };
 
@@ -92,11 +87,6 @@ namespace Analyzer4.Test
 		{
 			var test = @"
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
 
     namespace ConsoleApplication1
     {

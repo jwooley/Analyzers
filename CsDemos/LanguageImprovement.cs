@@ -10,7 +10,7 @@ namespace TestProject
             int x;
 
             if (int.TryParse("123", out x))
-                DoSomething();
+                DoSomething(x);
                 DoSomethingElse();
 
             var p = new Person();
@@ -20,7 +20,7 @@ namespace TestProject
         }
 
 
-        public static void DoSomething() { }
+        public static void DoSomething(int x) { Console.Write(x); }
         public static IEnumerable<Person> DoSomethingElse()
         {
             var people = new List<Person>();
