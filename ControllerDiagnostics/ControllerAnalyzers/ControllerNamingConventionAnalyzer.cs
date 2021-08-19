@@ -22,6 +22,8 @@ namespace ControllerAnalyzers
 
 		public override void Initialize(AnalysisContext context)
 		{
+			context.EnableConcurrentExecution();
+			context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
 			// context.RegisterCompilationAction(Analyzer);
 			// context.RegisterSyntaxNodeAction(Analyzer, SyntaxKind.ClassDeclaration);
 			context.RegisterSymbolAction(Analyzer, SymbolKind.NamedType);

@@ -72,7 +72,7 @@ namespace CodeCrackerSamples
         public bool IsPrime()
         {
             int[] primes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
-            return primes.Where(p => p == Age).Any();
+            return primes.Where(p => p == Age).Count() > 0;
         }
         public bool IsFibber()
         {
