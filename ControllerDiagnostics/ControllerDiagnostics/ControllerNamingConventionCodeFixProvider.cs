@@ -61,8 +61,7 @@ namespace Controller.CodeFixes
             //    .WithAdditionalAnnotations(Formatter.Annotation);
 
             var originalSolution = document.Project.Solution;
-            var optionSet = originalSolution.Workspace.Options;
-            var newSolution = await Renamer.RenameSymbolAsync(originalSolution, typeSymbol, newName, optionSet, cancellationToken).ConfigureAwait(false);
+            var newSolution = await Renamer.RenameSymbolAsync(originalSolution, typeSymbol, new(),  newName, cancellationToken).ConfigureAwait(false);
 
             return newSolution;
         }

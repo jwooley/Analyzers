@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using System;
+using System.Collections.Immutable;
 
-namespace ControllerDiagnostics.Test.Verifiers
+namespace Analyzer1.Test
 {
-	internal static class CSharpVerifierHelper
+    internal static class CSharpVerifierHelper
     {
         /// <summary>
         /// By default, the compiler reports diagnostics for nullable reference types at

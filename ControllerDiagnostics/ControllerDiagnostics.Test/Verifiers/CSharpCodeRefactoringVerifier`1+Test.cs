@@ -2,9 +2,9 @@
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
-namespace ControllerDiagnostics.Test.Verifiers
+namespace Analyzer1.Test
 {
-	public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
+    public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()
     {
         public class Test : CSharpCodeRefactoringTest<TCodeRefactoring, MSTestVerifier>

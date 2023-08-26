@@ -3,9 +3,9 @@ using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
-namespace ControllerDiagnostics.Test.Verifiers
+namespace Analyzer1.Test
 {
-	public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
+    public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         where TAnalyzer : DiagnosticAnalyzer, new()
         where TCodeFix : CodeFixProvider, new()
     {
