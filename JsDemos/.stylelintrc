@@ -4,6 +4,7 @@
     "color-no-invalid-hex": true,
     "declaration-colon-space-after": "always",
     "max-empty-lines": 2,
-    "unit-whitelist": ["em", "rem", "%", "s"]
+    "length-zero-no-unit": true,
+    "unit-allowed-list": ["em", "rem", "s", "%"]
   }
 }
