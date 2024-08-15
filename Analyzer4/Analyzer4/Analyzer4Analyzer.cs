@@ -42,7 +42,7 @@ namespace Analyzer4
 
             context.RegisterSyntaxNodeAction(AnalyzeLocal, SyntaxKind.LocalDeclarationStatement);
             context.RegisterSyntaxNodeAction(AnalyzeForeach, SyntaxKind.ForEachStatement);
-			//context.RegisterSyntaxNodeAction(AnalyzeField, SyntaxKind.FieldDeclaration);
+			context.RegisterSyntaxNodeAction(AnalyzeField, SyntaxKind.FieldDeclaration);
 
 		}
 
@@ -105,32 +105,32 @@ namespace Analyzer4
 			}
 		}
 
-		//private static void AnalyzeField(SyntaxNodeAnalysisContext context)
-		//{
-		//    FieldDeclarationSyntax syntax = (FieldDeclarationSyntax)context.Node;
-		//    var variables = syntax.Declaration?.Variables;
-		//    if (variables == null)
-		//    {
-		//        return;
-		//    }
+		private static void AnalyzeField(SyntaxNodeAnalysisContext context)
+		{
+			FieldDeclarationSyntax syntax = (FieldDeclarationSyntax)context.Node;
+			var variables = syntax.Declaration?.Variables;
+			if (variables == null)
+			{
+				return;
+			}
 
-		//    foreach (VariableDeclaratorSyntax declarator in variables.Value)
-		//    {
-		//        if (declarator ==  null)
-		//        {
-		//            continue;
-		//        }
-		//        var identifier = declarator.Identifier;
-		//        if (identifier.IsMissing)
-		//        {
-		//            continue;
-		//        }
-		//        if (identifier.ValueText.Length == 1)
-		//        {
-		//            string name = identifier.ValueText;
-		//            context.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), name));
-		//        }
-		//    }
-		//}
+			foreach (VariableDeclaratorSyntax declarator in variables.Value)
+			{
+				if (declarator == null)
+				{
+					continue;
+				}
+				var identifier = declarator.Identifier;
+				if (identifier.IsMissing)
+				{
+					continue;
+				}
+				if (identifier.ValueText.Length == 1)
+				{
+					string name = identifier.ValueText;
+					context.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), name));
+				}
+			}
+		}
 	}
 }
