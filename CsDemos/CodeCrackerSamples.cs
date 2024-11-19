@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCrackerSamples
+namespace TestProject.CC
 {
-    public class Class1
+    public class CodeCrackerSamples
     {
 
         const int theAnswer = 42;

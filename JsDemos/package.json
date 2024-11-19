@@ -1,5 +1,5 @@
 {
-  "name": "jsdemos",
+  "name": "demos",
   "version": "1.0.0",
   "description": "Samples for jslint/jshint",
   "main": "LintThis.js",
@@ -16,6 +16,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jim Wooley",
+  "author": "Jim",
   "license": "ISC"
 }

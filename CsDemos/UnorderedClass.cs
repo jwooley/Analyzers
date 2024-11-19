@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace LanguageFeaturesCS
+namespace TestProject
 {
     public class UnorderedClass
     {
